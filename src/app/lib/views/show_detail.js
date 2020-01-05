@@ -411,6 +411,7 @@
             }
             var that = this;
             var title = that.model.get('title');
+            var file_name = $(e.currentTarget).attr('data-file');
             var episode = $(e.currentTarget).attr('data-episode');
             var season = $(e.currentTarget).attr('data-season');
             var name = $(e.currentTarget).attr('data-title');
@@ -490,6 +491,7 @@
                 defaultSubtitle: Settings.subtitle_language,
                 device: App.Device.Collection.selected,
                 episodes: episodes,
+                file_name: file_name,
                 auto_play: auto_play,
                 auto_id: parseInt(season) * 100 + parseInt(episode),
                 auto_play_data: episodes_data
@@ -580,6 +582,7 @@
             _this.ui.startStreaming.show();
         },
         selectTorrent: function(torrent, key) {
+            $('.startStreaming').attr('data-file', torrent.file || '');
             $('.startStreaming').attr('data-torrent', torrent.url);
             $('.startStreaming').attr('data-quality', key);
 
