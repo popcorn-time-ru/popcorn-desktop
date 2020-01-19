@@ -9,7 +9,7 @@
             <div class="shp-img"></div>
         </div>
         <div class="sh-metadata">
-            <div class="shm-title"><%= title %></div>
+            <div class="shm-title"><%= displayTitle %></div>
             <div class="shm-infos">
                 <div class="shmi-year"><%= year %></div>
                     <span class="dot"></span>
@@ -40,7 +40,7 @@
                     <div class="number-container-tv hidden"><%= Math.round(rating.percentage) / 10 %><em>/10</em></div>
                 </div>
             </div>
-            <div class="shm-synopsis"><%= synopsis %></div>
+            <div class="shm-synopsis"><%= displaySynopsis %></div>
         </div>
         <div class="sh-actions">
             <div class="sha-bookmark"><%=i18n.__("Add to bookmarks") %></div>
@@ -71,7 +71,7 @@
                         <li class="tab-episode" data-id="<%=episodeData.tvdb_id %>" data-season="<%=episodeData.season %>" data-episode="<%=episodeData.episode %>">
                             <a href="#" class="episodeData">
                                 <span><%=episodeData.episode %></span>
-                                <div><%=episodeData.title %></div>
+                                <div><%=localizeEpisode(episodeData).listTitle %></div>
                             </a>
 
                             <i id="watched-<%=episodeData.season%>-<%=episodeData.episode%>" class="fa fa-eye watched"></i>
