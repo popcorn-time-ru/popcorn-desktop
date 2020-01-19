@@ -260,6 +260,7 @@
                         AdvSettings.set('lastTab', App.currentview);
                     }
                 /* falls through */
+                case 'translateTitle':
                 case 'watchedCovers':
                 case 'defaultFilters':
                 case 'theme':
@@ -287,7 +288,9 @@
                 case 'coversShowRating':
                 case 'torColSearchMore':
                 case 'nativeWindowFrame':
+                case 'translatePosters':
                 case 'translateSynopsis':
+                case 'translateEpisodes':
                 case 'showAdvancedSettings':
                 case 'alwaysOnTop':
                 case 'traktSyncOnStart':
