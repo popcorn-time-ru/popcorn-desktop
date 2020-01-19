@@ -31,6 +31,9 @@
 </div>
 
 <p class="title tooltipped" <% if(title.length > 20){ %> title="<%= title %>" data-toggle="tooltip" data-placement="auto bottom" <% } %> ><%= title %></p>
+<% if (typeof title2 !== 'undefined' && title2 !== '') {%>
+    <p class="title2 tooltipped" <% if(title2.length > 20){ %> title="<%= title2 %>" data-toggle="tooltip" data-placement="auto bottom" <% } %> ><%= title2 %></p>
+<%} %>
 <p class="year">
     <% if (typeof year !== 'undefined') {%>
         <%= year %>
