@@ -57,6 +57,10 @@
       App.vent.on("shortcuts:movies", _this.initKeyboardShortcuts);
 
       App.vent.on("change:quality", this.renderHealth, this);
+      // init fields in model
+      this.model.set('displayTitle', '');
+      this.model.set('displaySynopsis', '');
+      this.localizeTexts();
     },
 
     toggleShowQuality: function(e) {
@@ -117,6 +121,7 @@
 
       App.MovieDetailView = this;
 
+      this.localizeTexts();
       this.hideUnused();
       this.loadImages();
       this.loadComponents();
@@ -124,6 +129,23 @@
       this.initKeyboardShortcuts();
 
       this.refreshUiQuality();
+    },
+    localizeTexts: function() {
+        const locale = this.model.get('locale');
+        let title = this.model.get('title');
+        if (Settings.translateTitle === 'translated-origin' || Settings.translateTitle === 'translated') {
+            if (locale && locale.title) {
+                title = locale.title;
+            }
+        }
+        let synopsis = this.model.get('synopsis');
+        if (Settings.translateSynopsis) {
+            if (locale && locale.synopsis) {
+                synopsis = locale.synopsis;
+            }
+        }
+        this.model.set('displayTitle', title);
+        this.model.set('displaySynopsis', synopsis);
     },
     loadComponents: function() {
       // play control
@@ -181,6 +203,15 @@
         this.model.get("backdrop") ||
         this.model.get("poster") ||
         nobg;
+
+      if (Settings.translatePosters) {
+        var locale = this.model.get('locale');
+        if (locale) {
+          p = locale.poster ? locale.poster : p;
+          b = locale.backdrop ? locale.backdrop : b;
+        }
+      }
+
       loadImage(p, "poster");
       loadImage(b, "backdrop");
     },

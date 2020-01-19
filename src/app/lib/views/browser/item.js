@@ -33,12 +33,36 @@
         initialize: function () {
             this.setModelStates();
             this.isAprilFools();
+            this.localizeTexts();
         },
 
         onAttach: function () {
             this.loadImage();
             this.setCoverStates();
             this.setTooltips();
+        },
+
+        localizeTexts: function () {
+            var title = this.model.get('title');
+            var locale = this.model.get('locale');
+
+            let title1 = title;
+            let title2;
+            if (locale && locale.title) {
+                if (Settings.translateTitle === 'translated-origin') {
+                    title1 = locale.title;
+                    title2 = title;
+                }
+                if (Settings.translateTitle === 'origin-translated') {
+                    title2 = locale.title;
+                }
+                if (Settings.translateTitle === 'translated') {
+                    title1 = locale.title;
+                }
+            }
+
+            this.model.set('title1', title1);
+            this.model.set('title2', title2);
         },
 
         hoverItem: function (e) {
@@ -129,6 +153,13 @@
             }
             else {
             poster = this.model.get('poster') || noimg;
+            }
+
+            if (Settings.translatePosters) {
+                var locale = this.model.get('locale');
+                if (locale && locale.poster) {
+                    poster = locale.poster;
+                }
             }
 
             var setImage = function (img) {

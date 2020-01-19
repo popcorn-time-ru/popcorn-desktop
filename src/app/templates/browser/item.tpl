@@ -30,7 +30,10 @@
     </div>
 </div>
 
-<p class="title" title="<%= title %>"><%= title %></p>
+<p class="title" title="<%= title1 %>"><%= title1 %></p>
+<% if (typeof title2 !== 'undefined' && title2 !== '') {%>
+    <p class="title2" title="<%= title2 %>"><%= title2 %></p>
+<%} %>
 <p class="year">
     <% if (typeof year !== 'undefined') {%>
         <%= year %>
