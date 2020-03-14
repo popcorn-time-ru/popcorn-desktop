@@ -408,6 +408,9 @@ var Database = {
                 if (Settings.version === false) {
                     window.__isNewInstall = true;
                 }
+                if (Settings.language) {
+                    App.Providers.updateLanguage(Settings.language);
+                }
 
                 App.vent.trigger('initHttpApi');
                 App.vent.trigger('db:ready');
