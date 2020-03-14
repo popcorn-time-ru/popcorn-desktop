@@ -1,13 +1,13 @@
 {
-  "name": "Popcorn-Time",
+  "name": "Popcorn-Time-Ru",
   "companyName": "Popcorn Time",
   "installIcon": "./src/app/images/popcorntime.ico",
   "unInstallIcon": "./src/app/images/butter_uninstall.ico",
   "homepage": "http://popcorntime.sh/",
-  "bugs": "https://github.com/popcorn-official/popcorn-desktop/issues",
+  "bugs": "https://github.com/popcorn-time-ru/popcorn-desktop/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/popcorn-official/popcorn-desktop.git"
+    "url": "https://github.com/popcorn-time-ru/popcorn-desktop.git"
   },
   "license": "GPL-3.0",
   "main": "src/app/index.html",
@@ -23,7 +23,7 @@
     "yarn": ">= 1.0.0"
   },
   "window": {
-    "title": "Popcorn Time",
+    "title": "Popcorn Time Ru",
     "icon": "src/app/images/icon.png",
     "frame": false,
     "min_width": 960,
@@ -51,7 +51,7 @@
     "bootstrap": "~3.3.7",
     "butter-provider": "0.11.0",
     "butter-sanitize": "^0.1.1",
-    "butter-settings-popcorntime.io": "0.0.1",
+    "butter-settings-popcorntime.ru": "git+https://github.com/popcorn-time-ru/butter-settings-popcorn/",
     "chromecasts": "1.9.1",
     "defer-request": "0.0.3",
     "dlnacasts2": "0.1.2",
