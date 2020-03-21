@@ -412,6 +412,10 @@ var Database = {
                     App.Providers.updateLanguage(Settings.language);
                 }
 
+                if (Settings.apiServer) {
+                  App.Providers.updateUrl(Settings.apiServer);
+                }
+
                 App.vent.trigger('initHttpApi');
                 App.vent.trigger('db:ready');
 

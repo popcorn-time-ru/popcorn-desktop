@@ -106,6 +106,9 @@ Settings.trackers = {
   ]
 };
 
+// API Servers
+Settings.apiServer = '';
+
 // User interface
 Settings.language = "";
 Settings.coversShowRating = true;
