@@ -927,10 +927,9 @@ butter-sanitize@^0.1.1:
   dependencies:
     sanitizer "^0.1.3"
 
-butter-settings-popcorntime.io@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/butter-settings-popcorntime.io/-/butter-settings-popcorntime.io-0.0.3.tgz#7d0a6242cfc84cc2aa7f42c8f3905ac520a095f8"
-  integrity sha512-HDTp3ywT5Rxtam+lujKoeeQ7uD1hflDh/OQSKoIfVhIuGS2cn4vhYYdCfdblZr0mzD+rlvuIokr4rF3fxCI57g==
+"butter-settings-popcorntime.ru@git+https://github.com/popcorn-time-ru/butter-settings-popcorn/":
+  version "0.0.1"
+  resolved "git+https://github.com/popcorn-time-ru/butter-settings-popcorn/#162972bc51feb01b2f40d8a303b0256444baff0e"
 
 "bytebuffer@~3 >=3.5":
   version "3.5.5"
@@ -6905,10 +6904,15 @@ unc-path-regex@^0.1.2:
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
   integrity sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=
 
-underscore@>=1.8.3, underscore@>=1.x.x:
+underscore@>=1.8.3:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
   integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
+
+underscore@^1.8.3:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.10.2.tgz#73d6aa3668f3188e4adb0f1943bd12cfd7efaaaf"
+  integrity sha512-N4P+Q/BuyuEKFJ43B9gYuOj4TQUHXX+j2FqguVOpjkssLUUrnJofCcBccJSCoeturDoZU6GorDTHSvUDlSQbTg==
 
 underscore@~1.4.4:
   version "1.4.4"
