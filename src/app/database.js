@@ -409,6 +409,10 @@ var Database = {
                     window.__isNewInstall = true;
                 }
 
+                if (Settings.apiServer) {
+                  App.Providers.updateUrl(Settings.apiServer);
+                }
+
                 App.vent.trigger('initHttpApi');
                 App.vent.trigger('db:ready');
                 App.vent.trigger('stream:loadExistTorrents');

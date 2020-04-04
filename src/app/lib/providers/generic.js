@@ -6,6 +6,14 @@
 
   App.Providers.Generic = require("butter-provider");
 
+  function updateProviderUrl (url) {
+    for (let provider in cache) {
+      if (cache[provider] && cache[provider].apiURL) {
+        cache[provider].apiURL = [url,`cloudflare+${url}`];
+      }
+    }
+  }
+
   function updateProviderLanguage (language) {
     for (let provider in cache) {
       if (cache[provider] && cache[provider].hasOwnProperty('language')) {
@@ -95,6 +103,7 @@
   App.Providers.get = getProvider;
   App.Providers.delete = delProvider;
   App.Providers.install = installProvider;
+  App.Providers.updateUrl = updateProviderUrl;
   App.Providers.updateLanguage = updateProviderLanguage;
 
   App.Providers.getFromRegistry = getProviderFromRegistry;
