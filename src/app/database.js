@@ -408,9 +408,6 @@ var Database = {
                 if (Settings.version === false) {
                     window.__isNewInstall = true;
                 }
-                if (Settings.language) {
-                    App.Providers.updateLanguage(Settings.language);
-                }
 
                 App.vent.trigger('initHttpApi');
                 App.vent.trigger('db:ready');
@@ -425,6 +422,9 @@ var Database = {
                 window.setLanguage(Settings.language);
                 // set hardware settings and usefull stuff
                 return AdvSettings.setup();
+            })
+            .then(function () {
+                App.Providers.updateLanguage(Settings.language);
             })
             .then(function () {
                 App.Trakt = App.Config.getProviderForType('metadata');
