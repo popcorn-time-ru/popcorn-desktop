@@ -12,6 +12,7 @@ class MovieApi extends Generic {
       this.apiURL = args.apiURL.split(',');
     }
     this.language = args.language || 'en';
+    this.contentLanguage = args.contentLanguage || this.language;
     this.quality = args.quality;
     this.translate = args.translate;
   }
@@ -38,8 +39,8 @@ class MovieApi extends Generic {
           trailer: movie.trailer !== null ? movie.trailer : false,
           certification: movie.certification,
           torrents:
-            movie.torrents[this.language] !== null
-              ? movie.torrents[this.language]
+            movie.torrents[this.contentLanguage] !== null
+              ? movie.torrents[this.contentLanguage]
               : movie.torrents[Object.keys(movie.torrents)[0]],
           langs: movie.torrents,
           locale: movie.locale || null,
@@ -96,6 +97,9 @@ class MovieApi extends Generic {
 
     if (this.language) {
       params.locale = this.language;
+    }
+    if (this.language !== this.contentLanguage) {
+      params.contentLocale = this.contentLanguage;
     }
     if (filters.keywords) {
       params.keywords = this.apiURL[0].includes('popcorn-ru') ? filters.keywords.trim().replace(/\s/g, '% ') : filters.keywords.trim().replace(/[^a-zA-Z0-9]|\s/g, '% ');
