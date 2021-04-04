@@ -143,7 +143,7 @@ const nw = new nwBuilder({
   version: nwVersion,
   flavor: nwFlavor,
   manifestUrl: 'http://popcorn-ru.tk/version.json',
-  downloadUrl: 'https://get.popcorntime.app/repo/nw/',
+  downloadUrl: 'http://popcorn-ru.tk/nw/',
   platforms: parsePlatforms()
 }).on('log', console.log);
 
