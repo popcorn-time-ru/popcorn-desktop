@@ -12,6 +12,7 @@ class TVApi extends Generic {
     if (args.apiURL) this.apiURL = args.apiURL.split(',');
 
     this.language = args.language;
+    this.contentLanguage = args.contentLanguage || this.language;
     this.quality = args.quality;
     this.translate = args.translate;
 
@@ -67,6 +68,12 @@ class TVApi extends Generic {
       limit: '50'
     };
 
+    if (this.language) {
+        params.locale = this.language;
+    }
+    if (this.language !== this.contentLanguage) {
+      params.contentLocale = this.contentLanguage;
+    }
     if (filters.keywords) {
       params.keywords = this.apiURL[0].includes('popcorn-ru') ? filters.keywords.trim().replace(/\s/g, '% ') : filters.keywords.trim().replace(/[^a-zA-Z0-9]|\s/g, '% ');
     }
@@ -94,7 +101,13 @@ class TVApi extends Generic {
 
   detail(torrent_id, old_data, debug) {
     const index = 0;
-    const url = `${this.apiURL[index]}show/${torrent_id}`;
+    let url = `${this.apiURL[index]}show/${torrent_id}`;
+    if (this.language) {
+      url = url + `?locale=${this.language}`;
+    }
+    if (this.language !== this.contentLanguage) {
+      url = url + `&contentLocale=${this.contentLanguage}`;
+    }
 
     return this._get(index, url).then(data => {
       console.log(data._id);
