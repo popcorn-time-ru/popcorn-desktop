@@ -127,6 +127,58 @@
     async "0.2.10"
     localforage "^1.9.0"
 
+"@sentry/browser@^7.4":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-7.4.1.tgz#7cbc481a23970338634084658fb1c9ecac4830f6"
+  integrity sha512-eHSjseHBmfqmyS8auYDQPVSNy2yOEoqGDUumspyvZzxy8taFNiBDvt8JdIXyCwuAhEQBfNi6kMMGlcgkcWOVpw==
+  dependencies:
+    "@sentry/core" "7.4.1"
+    "@sentry/types" "7.4.1"
+    "@sentry/utils" "7.4.1"
+    tslib "^1.9.3"
+
+"@sentry/core@7.4.1":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-7.4.1.tgz#a18441f2da328f170cd7c78f4f1040e39a0dabcb"
+  integrity sha512-YHx6CCds6ZqyCXAYX8ZpBKZLcFsGWbXZwofIfdILxO1PoToKXOLMPY4XFcI4NNhNg1gM3efleVdcyHKfBLDNyw==
+  dependencies:
+    "@sentry/hub" "7.4.1"
+    "@sentry/types" "7.4.1"
+    "@sentry/utils" "7.4.1"
+    tslib "^1.9.3"
+
+"@sentry/hub@7.4.1":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-7.4.1.tgz#3fa188d85a272e26ffbf94bf38b5b8369b7692e7"
+  integrity sha512-VSeaMgn5sbAJ+TCk0NpQbyV5zI3YeuLZgQogQF1YLtNdW9kW9vRDjawNnKEqu7aX18s8bdVbnwjK1oUHUXDKdg==
+  dependencies:
+    "@sentry/types" "7.4.1"
+    "@sentry/utils" "7.4.1"
+    tslib "^1.9.3"
+
+"@sentry/tracing@^7.4":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-7.4.1.tgz#2fd242f01f9ef550182124adbd6d426c5505b98c"
+  integrity sha512-Te/1GwQmy+D/USOd1bXjyrstnXnArW+5ufxgHlX7LfcQlCcfVEO2PNJkxSPG5fouLZdEjlRc8Yv+wVz5iCwDaQ==
+  dependencies:
+    "@sentry/hub" "7.4.1"
+    "@sentry/types" "7.4.1"
+    "@sentry/utils" "7.4.1"
+    tslib "^1.9.3"
+
+"@sentry/types@7.4.1":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.4.1.tgz#bc6e782084db0860e4e93ef1b2c2793f9bea9958"
+  integrity sha512-PXzoTwdR5qAoZGdDromiE1JuIJE43ItDVpmMQYA+L40BdlrmvKh1nAP13e8tTCOKxMJ+4TulTLnysumo0NDTlw==
+
+"@sentry/utils@7.4.1":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-7.4.1.tgz#9a1a052129f0846a7b700578531b85b531b43734"
+  integrity sha512-fJnMPKrM9/fGr43aNCiAJG5F1W6Scpu7TV5MTvHDx7XPVfJhvlW70XBOtrpF1kD7xD9QJw5t+50WX6HctAACjA==
+  dependencies:
+    "@sentry/types" "7.4.1"
+    tslib "^1.9.3"
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.npmjs.org/@sindresorhus/is/-/is-0.14.0.tgz"
@@ -7394,6 +7446,11 @@ ts-import@^2.0.39:
   integrity sha512-yTP9fSDaBL1LvcN7/taRHbcQoazk7cLrDOEPyIDUVKLNYTMhaDkvZhfUwp41iXe+GlAFL6l87ZoGABWZRdIfjg==
   dependencies:
     options-defaults "^2.0.39"
+
+tslib@^1.9.3:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
+  integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
