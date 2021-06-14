@@ -1,6 +1,7 @@
 var memoize = require('memoizee');
 var _ = require('lodash');
 const socksProxyAgent = require( 'socks-proxy-agent' );
+const os = require( 'os' );
 
 var processArgs = function(config, args) {
   var newArgs = {};
@@ -90,10 +91,11 @@ class Provider {
 
   buildRequest(baseUrl, uri)
   {
+    let ptString = nw.App.manifest.name + '/' + nw.App.manifest.version;
+    let osString = os.platform() + ' ' + os.arch() + ' ' + os.release();
     let options = {
       headers: {
-        'User-Agent':
-            'Mozilla/5.0 (Linux) AppleWebkit/534.30 (KHTML, like Gecko) PT/4.4.0'
+        'User-Agent': ptString + ' (' + osString + ')'
       }
     };
 
