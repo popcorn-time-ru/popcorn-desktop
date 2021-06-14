@@ -7,7 +7,8 @@ class MovieApi extends Generic {
   constructor(args) {
     super(args);
 
-    this.language = args.language;
+    this.language = args.language || 'en';
+    this.contentLanguage = args.contentLanguage || this.language;
   }
 
   _formatForPopcorn(movies) {
@@ -32,10 +33,11 @@ class MovieApi extends Generic {
           trailer: movie.trailer !== null ? movie.trailer : false,
           certification: movie.certification,
           torrents:
-            movie.torrents['en'] !== null
-              ? movie.torrents['en']
+            movie.torrents[this.contentLanguage]
+              ? movie.torrents[this.contentLanguage]
               : movie.torrents[Object.keys(movie.torrents)[0]],
-          langs: movie.torrents
+          langs: movie.torrents,
+          locale: movie.locale || null,
         });
       }
     });
@@ -56,6 +58,12 @@ class MovieApi extends Generic {
       limit: '50'
     };
 
+    if (this.language) {
+      params.locale = this.language;
+    }
+    if (this.language !== this.contentLanguage) {
+      params.contentLocale = this.contentLanguage;
+    }
     if (filters.keywords) {
       params.keywords = this.apiURL[0].includes('popcorn-ru') ? filters.keywords.trim() : filters.keywords.trim().replace(/[^a-zA-Z0-9]|\s/g, '% ');
     }
