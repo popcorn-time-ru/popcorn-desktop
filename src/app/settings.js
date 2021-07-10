@@ -11,7 +11,7 @@ var Settings = {
   issuesUrl: 'https://github.com/popcorn-official/popcorn-desktop/issues',
   sourceUrl: 'https://github.com/popcorn-official/popcorn-desktop/',
   commitUrl: 'https://github.com/popcorn-official/popcorn-desktop/commit',
-  dht: '',
+  dht: 'a4a9ad29e303e137ecb995c50a4e104b3e8f72e5',
   updateKey:
     '-----BEGIN PUBLIC KEY-----\n' +
     'MIIBtjCCASsGByqGSM44BAEwggEeAoGBAPNM5SX+yR8MJNrX9uCQIiy0t3IsyNHs\n' +
