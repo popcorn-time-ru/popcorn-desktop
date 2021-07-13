@@ -9,7 +9,7 @@ class MovieApi extends Generic {
 
     this.language = args.language;
     this.contentLanguage = args.contentLanguage || this.language;
-    this.addEnglish = args.addEnglish || true;
+    this.contentLangOnly = args.contentLangOnly || false;
   }
 
   _formatForPopcorn(movies) {
@@ -17,10 +17,6 @@ class MovieApi extends Generic {
 
     movies.forEach(movie => {
       if (movie.torrents) {
-        const curLang = movie.torrents[this.contentLanguage]
-            ? this.contentLanguage : Object.keys(movie.torrents)[0];
-        let langs = {};
-        langs[curLang] = movie.torrents[curLang];
         results.push({
           type: 'movie',
           imdb_id: movie.imdb_id,
@@ -37,8 +33,9 @@ class MovieApi extends Generic {
           synopsis: movie.synopsis,
           trailer: movie.trailer !== null ? movie.trailer : false,
           certification: movie.certification,
-          torrents: movie.torrents[curLang],
-          langs: langs,
+          torrents: movie.torrents[movie.contextLocale],
+          langs: movie.torrents,
+          defaultAudio: movie.contextLocale,
           locale: movie.locale || null,
         });
       }
@@ -62,9 +59,10 @@ class MovieApi extends Generic {
 
     params.locale = this.language;
     params.contentLocale = this.contentLanguage;
-    if (this.addEnglish && params.contentLocale !== 'en') {
-      params.contentLocale += ',en';
+    if (!this.contentLangOnly) {
+      params.showAll = 1;
     }
+
     if (filters.keywords) {
       params.keywords = this.apiURL[0].includes('popcorn-ru') ? filters.keywords.trim() : filters.keywords.trim().replace(/[^a-zA-Z0-9]|\s/g, '% ');
     }

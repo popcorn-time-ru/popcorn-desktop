@@ -219,10 +219,10 @@
                     <select name="contentLanguage"><%=langs%></select>
                     <div class="dropdown-arrow"></div>
                 </div>
-                <i style="margin: 10px">&nbsp;</i>
-                <input class="settings-checkbox" name="addEnglish" id="addEnglish" type="checkbox" <%=(Settings.addEnglish? "checked='checked'":"")%>>
-                <label class="settings-label" for="addEnglish" id="addEnglish"><%= i18n.__("Also add english content") %></label>
-                <em><i class="fas fa-exclamation-circle">&nbsp;&nbsp;</i><%= i18n.__("We currently have good collections for only a few languages. If you can help with filling the database in your language, then contact us.") %></em>
+            </span>
+            <span>
+                <input class="settings-checkbox" name="contentLangOnly" id="contentLangOnly" type="checkbox" <%=(Settings.contentLangOnly? "checked='checked'":"")%>>
+                <label class="settings-label" for="contentLangOnly" id="contentLangOnly"><%= i18n.__("Only show content available in the preferred language") %> </label>
             </span>
             <span>
                 <div class="dropdown translateTitle">
@@ -247,6 +247,9 @@
             <span>
                 <input class="settings-checkbox" name="translatePosters" id="translatePosters" type="checkbox" <%=(Settings.translatePosters? "checked='checked'":"")%>>
                 <label class="settings-label" for="translatePosters"><%= i18n.__("Translate Posters") %></label>
+            </span>
+            <span id="translation_info">
+                <em>* <%= i18n.__("Translations depend on availability. Also some options might not be supported by some API servers") %></em>
             </span>
         </div>
     </section>

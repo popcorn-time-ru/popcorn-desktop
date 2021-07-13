@@ -10,17 +10,7 @@ class TVApi extends Generic {
 
     this.language = args.language;
     this.contentLanguage = args.contentLanguage || this.language;
-    this.addEnglish = args.addEnglish || true;
-
-    try {
-      this.tvdb = new TVDB('7B95D15E1BE1D75A');
-      this.tvdb.getLanguages().then(langlist => (this.TVDBLangs = langlist));
-    } catch (err) {
-      this.TVDBLangs = false;
-      console.warn(
-        'Something went wrong with TVDB, overviews can\'t be translated.'
-      );
-    }
+    this.contentLangOnly = args.contentLangOnly || false;
   }
 
   extractIds(items) {
@@ -35,9 +25,10 @@ class TVApi extends Generic {
 
     params.locale = this.language;
     params.contentLocale = this.contentLanguage;
-    if (this.addEnglish && params.contentLocale !== 'en') {
-      params.contentLocale += ',en';
+    if (!this.contentLangOnly) {
+      params.showAll = 1;
     }
+
     if (filters.keywords) {
       params.keywords = this.apiURL[0].includes('popcorn-ru') ? filters.keywords.trim() : filters.keywords.trim().replace(/[^a-zA-Z0-9]|\s/g, '% ');
     }
@@ -63,63 +54,22 @@ class TVApi extends Generic {
   }
 
   detail(torrent_id, old_data, debug) {
+    return this.contentOnLang(torrent_id, old_data.contextLocale);
+  }
+
+  contentOnLang(torrent_id, lang) {
     const params = {};
     if (this.language) {
       params.locale = this.language;
     }
-    if (this.language !== this.contentLanguage) {
-      params.contentLocale = this.contentLanguage;
+    if (this.language !== lang) {
+      params.contentLocale = lang;
     }
     const uri = `show/${torrent_id}?` + new URLSearchParams(params);
 
     return this._get(0, uri).then(data => {
-      console.log(data._id);
-      if (this.translate && this.language !== 'en') {
-        let langAvailable;
-        for (let x = 0; x < this.TVDBLangs.length; x++) {
-          if (this.TVDBLangs[x].abbreviation.indexOf(this.language) > -1) {
-            langAvailable = true;
-            break;
-          }
-        }
-
-        if (!langAvailable) {
-          return sanitize(data);
-        } else {
-          const reqTimeout = setTimeout(() => sanitize(data), 2000);
-
-          console.info(
-            `Request to TVApi: '${old_data.title}' - ${this.language}`
-          );
-          return this.tvdb
-            .getSeriesAllById(old_data.tvdb_id)
-            .then(localization => {
-              clearTimeout(reqTimeout);
-
-              data = Object.assign(data, {
-                synopsis: localization.Overview
-              });
-
-              for (let i = 0; i < localization.Episodes.length; i++) {
-                for (let j = 0; j < data.episodes.length; j++) {
-                  if (
-                    localization.Episodes[i].id.toString() ===
-                    data.episodes[j].tvdb_id.toString()
-                  ) {
-                    data.episodes[j].overview =
-                      localization.Episodes[i].Overview;
-                    break;
-                  }
-                }
-              }
-
-              return sanitize(data);
-            })
-            .catch(err => sanitize(data));
-        }
-      } else {
-        return sanitize(data);
-      }
+      return data;
+      return sanitize(data);
     });
   }
 }
