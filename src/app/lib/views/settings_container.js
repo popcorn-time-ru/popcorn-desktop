@@ -54,9 +54,6 @@
             'click .reset-current-filter': 'resetFilter',
             'click .update-dht': 'updateDht',
             'click .update-app': 'updateApp',
-            'mousedown #customMoviesServer': 'showFullDatalist',
-            'mousedown #customSeriesServer': 'showFullDatalist',
-            'mousedown #customAnimeServer': 'showFullDatalist'
         },
 
         onAttach: function () {
