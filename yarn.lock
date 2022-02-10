@@ -1141,13 +1141,6 @@ butter-provider@0.11.0:
   dependencies:
     memoizee "^0.4.5"
 
-butter-sanitize@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmjs.org/butter-sanitize/-/butter-sanitize-0.1.1.tgz"
-  integrity sha512-DOZ3QFBiY79hk33Pv/pKibRXlZUuPoRvcnZ2bhrJJzHePar/IQjaQNRZi6tNXf86VS+lG5O3VDJVJ9JvMjsa4Q==
-  dependencies:
-    sanitizer "^0.1.3"
-
 butter-settings-popcorntime.app@0.0.10:
   version "0.0.10"
   resolved "https://registry.npmjs.org/butter-settings-popcorntime.app/-/butter-settings-popcorntime.app-0.0.10.tgz"

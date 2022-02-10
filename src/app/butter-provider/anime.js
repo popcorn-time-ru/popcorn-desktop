@@ -1,7 +1,6 @@
 'use strict';
 
 const TVApi = require('./tv');
-const sanitize = require('butter-sanitize');
 const i18n = require('i18n');
 
 class AnimeApi extends TVApi {
@@ -34,7 +33,7 @@ class AnimeApi extends TVApi {
       data.forEach(entry => {entry.type = 'show'; entry.title = entry.slug.replace(/-/g, ' ').capitalizeEach();});
 
       return {
-        results: sanitize(data),
+        results: data,
         hasMore: true
       };
     });
