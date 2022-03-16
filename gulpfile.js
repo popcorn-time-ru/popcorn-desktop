@@ -221,7 +221,7 @@ gulp.task('run', () => {
         reject(new Error('Unsupported %s platform', platform));
     }
 
-    console.log('Running %s from cache', platform);
+    console.log('Running %s from cache (%s)', platform, bin);
 
     // spawn cached binary with package.json, toggle dev flag
     const child = spawn(bin, ['.', '--development']);

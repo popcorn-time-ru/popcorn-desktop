@@ -5145,7 +5145,7 @@ number-is-nan@^1.0.0:
 
 "nw-builder@https://github.com/berard/nw-builder":
   version "3.5.7"
-  resolved "https://github.com/berard/nw-builder#84c05c1198a57c2cc997e954fa0ae1fbbf989573"
+  resolved "https://github.com/berard/nw-builder#016aa2977e7d73869ec8e41be670bcbebebbfe71"
   dependencies:
     archiver "^2.1.1"
     boxen "^1.1.0"
