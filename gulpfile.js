@@ -4,7 +4,7 @@
  * setup *
  ********/
 const nwVersion = '0.44.5',
-  availablePlatforms = ['linux32', 'linux64', 'win32', 'win64', 'osx64'],
+  availablePlatforms = ['linux32', 'linux64', 'win32', 'win64', 'osx64', 'osxarm'],
   releasesDir = 'build',
   nwFlavor = 'sdk';
 
@@ -221,7 +221,7 @@ gulp.task('run', () => {
         reject(new Error('Unsupported %s platform', platform));
     }
 
-    console.log('Running %s from cache', platform);
+    console.log('Running %s from cache (%s)', platform, bin);
 
     // spawn cached binary with package.json, toggle dev flag
     const child = spawn(bin, ['.', '--development']);

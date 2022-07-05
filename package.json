@@ -76,6 +76,7 @@
     "nedb-promises": "^5.0.0",
     "noble-ed25519": "^1.2.5",
     "node-tvdb": "^4.1.0",
+    "nw-builder": "https://github.com/berard/nw-builder",
     "opensubtitles-api": "^5.1.2",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
@@ -119,7 +120,6 @@
     "jshint": "^2.9.6",
     "jshint-stylish": "^2.2.1",
     "nib": "^1.1.2",
-    "nw-builder": "^3.5.7",
     "stylus": "^0.54.5",
     "yargs": "^12.x.x"
   }
