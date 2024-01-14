@@ -1,3 +1,24 @@
+## 0.4.10 - Ogres like cakes - 14 January 2024
+
+New Features:
+- Support two versions of nwjs
+- Support Anime shows
+- Add Watched tab
+- Add flatpack player support for Fedora
+- Update WebTorrent to 1.9.7
+
+Bug Fixes:
+- Fix some flags support
+- Fix display translated title
+
+Other:
+- Remove VPNht support
+- Remove old not working updater
+- Update build system
+- Update Torrent Collection providers
+- Update various modules/dependencies
+- Various other small fixes and optimizations
+
 ## 0.4.9 - Ogres are not like cakes - 04 September 2022
 
 New Features:
