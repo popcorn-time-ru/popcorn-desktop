@@ -6,7 +6,7 @@ New Features:
 - Add Watched tab
 - Add Seedbox option for exiting the app when downloads complete
 - Add VLC flatpack external player support
-- Add Movie/Series detail UI transparency option
+- Add Movies/Series UI Transparency option
 - Add new theme Dutchy's Dark Orange
 - Switch to the new OpenSubtitles REST API
 - Update WebTorrent to 1.9.7
