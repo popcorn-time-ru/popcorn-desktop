@@ -1,4 +1,4 @@
-## 0.5.0 - Mischief Managed - 6 February 2024
+## 0.5.0 - Mischief Managed - 10 February 2024
 
 New Features:
 - Update NW.js runtime to 0.82.0 (0.44.5 still supported as an option for this release)
