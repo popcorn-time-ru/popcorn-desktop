@@ -1,4 +1,4 @@
-## 0.5.0 - Mischief Managed - 6 February 2024
+## 0.5.0 - Mischief Managed - 10 February 2024
 
 New Features:
 - Update NW.js runtime to 0.82.0 (0.44.5 still supported as an option for this release)
@@ -6,6 +6,8 @@ New Features:
 - Add Watched tab
 - Add Seedbox option for exiting the app when downloads complete
 - Add VLC flatpack external player support
+- Add Movie/Series detail UI transparency option
+- Add new theme Dutchy's Dark Orange
 - Switch to the new OpenSubtitles REST API
 - Update WebTorrent to 1.9.7
 
@@ -16,6 +18,7 @@ Bug Fixes:
 - Fix bug which caused switching to the default Chromium player when broken trailer link
 - Fix bug which prevented saving magnet links with no name property
 - Fix missing provider icons when no source link
+- Fix Series poster zoom implementation
 - Fix brightness and hue filters implementations
 - Fix title display for mpv external player
 
