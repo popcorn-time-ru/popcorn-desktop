@@ -330,10 +330,6 @@
             // set volume
             this.player.volume(Settings.playerVolume);
 
-            var fullscreenOverl = document.createElement('div');
-            fullscreenOverl.className = 'fullscreen-overl';
-            document.getElementsByClassName('video-js')[0].appendChild(fullscreenOverl);
-
             // resume position
             if (Settings.lastWatchedTitle === this.model.get('title') && Settings.lastWatchedTime > 0) {
                 var position = Settings.lastWatchedTime;
@@ -1185,13 +1181,13 @@
             if (curVideo[0]) {
                 var multPer = ((curVideo[0].videoWidth / curVideo[0].videoHeight) / (screen.width / screen.height))*100;
                 if (curVideo.width() > $('#video_player').width() || curVideo.height() > $('#video_player').height()) {
-                    curVideo.css({'width': '100%', 'height': '100%', 'left': '0', 'top': '0'});
+                    curVideo.removeAttr('style');
                     this.displayOverlayMsg(i18n.__('Original'));
                 } else if (multPer > 100) {
-                    curVideo.css({'width': multPer + '%', 'left': 50-multPer/2 + '%'});
+                    curVideo.css({'width': multPer + '%', 'left': 50-multPer/2 + '%', 'border': 'none'});
                     this.displayOverlayMsg(i18n.__('Fit screen'));
                 } else if (multPer < 100) {
-                    curVideo.css({'height': 10000/multPer + '%', 'top': 50-5000/multPer + '%'});
+                    curVideo.css({'height': 10000/multPer + '%', 'top': 50-5000/multPer + '%', 'border': 'none'});
                     this.displayOverlayMsg(i18n.__('Fit screen'));
                 } else {
                     this.displayOverlayMsg(i18n.__('Video already fits screen'));
