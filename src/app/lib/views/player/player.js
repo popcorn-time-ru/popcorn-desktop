@@ -716,7 +716,7 @@
             this.sendToTrakt('stop');
 
             // remove wrong metadata
-            var title = path.basename(this.model.get('src'));
+            var title = this.model.get('filename') || path.basename(this.model.get('src'));
             this.model.set('imdb_id', false);
             this.model.set('cover', false);
             this.model.set('title', title);
@@ -739,7 +739,11 @@
             var item;
             for (var i = $('.vjs-subtitles-button .vjs-menu-item').length - 1; i > 0; i--) {
                 item = $('.vjs-subtitles-button .vjs-menu-item')[i];
-                if (item.innerText !== i18n.__('Subtitles') && item.innerText !== i18n.__('Custom...') && item.innerText !== i18n.__('Disabled')) {
+                if (item.innerText !== i18n.__('Subtitles') && item.innerText !== i18n.__('Custom...') && item.innerText !== i18n.__('Disabled') && item.innerText !== i18n.__('Local')) {
+                    if (item.classList.contains('vjs-selected')) {
+                        this.prevSub = $('.vjs-subtitles-button .vjs-menu-item')[0];
+                        this.prevSub.click();
+                    }
                     item.remove();
                 }
             }

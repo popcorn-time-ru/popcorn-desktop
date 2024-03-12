@@ -531,6 +531,10 @@ var isVideo = function (file) {
 };
 
 var handleVideoFile = function (file) {
+  var vjsPlayer = document.getElementById('video_player');
+  if (vjsPlayer) {
+    videojs(vjsPlayer).dispose();
+  }
   App.vent.trigger('settings:close');
   App.vent.trigger('about:close');
   App.vent.trigger('keyboard:close');
@@ -542,16 +546,17 @@ var handleVideoFile = function (file) {
 
   // look for local subtitles
   var checkSubs = function () {
+    var _dir = file.path.replace(/\\/g, '/');
+    _dir = _dir.substr(0, _dir.lastIndexOf('/'));
     var _ext = path.extname(file.name);
-    var toFind = file.path.replace(_ext, '.srt');
-
-    if (fs.existsSync(path.join(toFind))) {
-      return {
-        local: path.join(toFind)
-      };
-    } else {
-      return null;
-    }
+    var _filename = file.name.replace(_ext, '');
+    var found = null;
+    fs.readdirSync(_dir).forEach(file => {
+      if (file.includes(_filename) && file.endsWith('.srt')) {
+        return found = { local: path.join(_dir, file) };
+      }
+    });
+    return found;
   };
 
   // get subtitles from provider
@@ -680,7 +685,7 @@ var handleVideoFile = function (file) {
         if (localsub !== null) {
           playObj.defaultSubtitle = 'local';
         } else {
-          playObj.defaultSubtitle = 'none';
+          playObj.defaultSubtitle = Settings.subtitle_language;
         }
         resolve(playObj);
       })
@@ -690,7 +695,7 @@ var handleVideoFile = function (file) {
         if (localsub !== null) {
           playObj.defaultSubtitle = 'local';
         } else {
-          playObj.defaultSubtitle = 'none';
+          playObj.defaultSubtitle = Settings.subtitle_language;
         }
 
         if (!playObj.title) {
@@ -716,7 +721,7 @@ var handleVideoFile = function (file) {
     var torrentStart = new Backbone.Model({
       torrent: localVideo,
       title: fileName,
-      defaultSubtitle: Settings.subtitle_language,
+      defaultSubtitle: localVideo.defaultSubtitle || Settings.subtitle_language,
       device: App.Device.Collection.selected,
       video_file: {
         name: fileName,
