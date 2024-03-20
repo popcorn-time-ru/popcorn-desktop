@@ -38,9 +38,9 @@ jobs:
         with:
           node-version: 20
 
-      - name: yarn version
+      - name: yarn enable
         run: |
-          yarn version
+          corepack enable yarn
 
       - name: node version
         run: |
