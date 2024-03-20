@@ -23,9 +23,7 @@
     "postinstall": "patch-package"
   },
   "chromium-args": "--enable-node-worker",
-  "engines": {
-    "yarn": ">= 1.0.0"
-  },
+  "packageManager": "yarn@3.2.3",
   "window": {
     "title": "Popcorn Time",
     "icon": "src/app/images/icon.png",
@@ -70,10 +68,10 @@
     "json-rpc2": "^2.0",
     "lodash": "^4.17.19",
     "memoizee": "0.x.x",
+    "mime": "^3.0.0",
     "mkdirp": "*",
     "mousetrap": "~1.6.5",
     "mv": "2.x.x",
-    "mime": "^3.0.0",
     "nedb-promises": "^5.0.3",
     "node-tvdb": "^4.1.0",
     "opensubtitles-api": "^5.1.2",
