@@ -203,7 +203,7 @@
     hideTooltipsSubs: function (e) {
       this.hideTooltips();
       if (e.button === 2) {
-        nw.Shell.openExternal('https://www.opensubtitles.org/search/sublanguageid-all/' + (this.model.get('imdb_id') ? this.model.get('imdb_id').replace('tt', 'imdbid-') : ''));
+        nw.Shell.openExternal('https://www.opensubtitles.com/en/search-all/sublanguageid-all/' + (this.model.get('imdb_id') ? 'id-' + this.model.get('imdb_id').replace('tt', '') : ''));
       }
     },
 
