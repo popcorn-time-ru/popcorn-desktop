@@ -25,7 +25,8 @@ var Settings = {
     'RTcms0CPio56gg==\n' +
     '-----END PUBLIC KEY-----\n',
   opensubtitles: {
-    useragent: 'Butter'
+    useragent: 'Butter',
+    apikey: 'sAUUD6B9mStMguWGyVSzkXKnHVbuUL6e' 
   },
   trakttv: {
     client_id:
