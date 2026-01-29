@@ -5,6 +5,32 @@
 
     var self;
 
+    /**
+     * Resolve OpenSubtitles.com URL (oscom://file_id) to actual download URL
+     * The new API requires a POST request to get the download link
+     */
+    var resolveOscomUrl = function (url) {
+        return new Promise(function (resolve, reject) {
+            if (!url.startsWith('oscom://')) {
+                return resolve(url);
+            }
+
+            var fileId = url.replace('oscom://', '');
+            var subtitleProvider = App.Config.getProviderForType('subtitle');
+
+            if (subtitleProvider && typeof subtitleProvider.getDownloadUrl === 'function') {
+                subtitleProvider.getDownloadUrl(fileId)
+                    .then(resolve)
+                    .catch(function (err) {
+                        win.error('Failed to resolve OpenSubtitles download URL:', err);
+                        reject(err);
+                    });
+            } else {
+                reject(new Error('Subtitle provider does not support getDownloadUrl'));
+            }
+        });
+    };
+
     var findSrt = function (input) {
         var files = fs.readdirSync(input);
         for (var f in files) {
@@ -31,25 +57,36 @@
             var fpath = path.join(folder, vname + '.' + data.lang.substr(0,2)); // subtitle local path, no extension
 
             request.get(furl).on('response', function (response) {
-                var rtype = (response.headers['content-type'] || '').split(';')[0].trim(); // response type
-                var cdisp = (response.headers['content-disposition'] || ''); // content disposition
+                var rtype = (response.headers['content-type'] || '').split(';')[0].trim().toLowerCase(); // response type
+                var cdisp = (response.headers['content-disposition'] || '').toLowerCase(); // content disposition
                 var fgz,fzip,fsrt;
                 var ext;
 
-                if (rtype.match('gz') || cdisp.match('gz')) {
+                // Also check the URL for file extension hints
+                var urlLower = furl.toLowerCase();
+
+                if (rtype.match('gz') || cdisp.match('gz') || urlLower.match(/\.gz($|\?)/)) {
                     // gzipped file
                     ext = '.gz';
                     fgz = true;
-                } else if (rtype.match('zip') || cdisp.match('zip')) {
+                } else if (rtype.match('zip') || cdisp.match('zip') || urlLower.match(/\.zip($|\?)/)) {
                     // zipped file
                     ext = '.zip';
                     fzip = true;
-                } else if (rtype.match('srt') || cdisp.match('srt')) {
+                } else if (rtype.match('srt') || cdisp.match('srt') || urlLower.match(/\.srt($|\?)/)) {
                     // srt subtitle
                     ext = '.srt';
                     fsrt = true;
+                } else if (rtype.match('text') || rtype.match('octet-stream') || rtype === '') {
+                    // OpenSubtitles.com often returns text/plain or application/octet-stream for SRT files
+                    // Assume SRT format for these generic types
+                    ext = '.srt';
+                    fsrt = true;
+                    win.info('Subtitle: assuming SRT format for content-type: ' + rtype);
                 } else {
-                    reject(new Error('Subtitle: response error, file is not gz,zip,srt'));
+                    win.error('Subtitle: unexpected content-type: ' + rtype + ', disposition: ' + cdisp + ', url: ' + furl);
+                    reject(new Error('Subtitle: response error, file is not gz,zip,srt (got: ' + rtype + ')'));
+                    return;
                 }
 
                 var fileStream = fs.createWriteStream(fpath+ext).on('finish', function () {
@@ -113,7 +150,11 @@
                     // Ignore EEXIST
                 }
 
-                downloadFromUrl(data).then(function (spath) {
+                // Handle OpenSubtitles.com URLs (oscom://file_id)
+                resolveOscomUrl(data.url).then(function (resolvedUrl) {
+                    data.url = resolvedUrl;
+                    return downloadFromUrl(data);
+                }).then(function (spath) {
                     App.vent.trigger('subtitle:downloaded', spath);
                 }).catch(function (error) {
                     win.error('Subtitle download error:', error);

@@ -764,16 +764,16 @@
         },
 
         createOpensubtitles: function (e) {
-            Common.openOrClipboardLink(e, 'https://www.opensubtitles.org/newuser', 'link');
+            Common.openOrClipboardLink(e, 'https://www.opensubtitles.com/users/sign_up', 'link');
         },
 
         connectOpensubtitles: function (e) {
             var self = this,
                 usn = $('#opensubtitlesUsername').val(),
                 pw = $('#opensubtitlesPassword').val(),
-                OS = require('opensubtitles-api');
+                OS = require('opensubtitles.com');
 
-            var cross =  $('.opensubtitles-options .invalid-cross');
+            var cross = $('.opensubtitles-options .invalid-cross');
             var spinner = $('.opensubtitles-options .loading-spinner');
 
             cross.hide();
@@ -781,19 +781,17 @@
             if (usn !== '' && pw !== '') {
                 spinner.show();
                 var OpenSubtitles = new OS({
-                    useragent: Settings.opensubtitles.useragent + ' v' + (Settings.version || 1),
-                    username: usn,
-                    password: Common.md5(pw),
-                    ssl: true
+                    apikey: Settings.opensubtitles.apikey,
+                    useragent: 'Popcorn Time v' + (Settings.version || '0.5.1')
                 });
-                const delay = function(ms) {
-                  return new Promise(resolve => setTimeout(resolve, ms));
-                };
-                OpenSubtitles.login()
+                OpenSubtitles.login({
+                    username: usn,
+                    password: pw
+                })
                     .then(function (obj) {
                         if (obj.token) {
                             AdvSettings.set('opensubtitlesUsername', usn);
-                            AdvSettings.set('opensubtitlesPassword', Common.md5(pw));
+                            AdvSettings.set('opensubtitlesPassword', pw);
                             AdvSettings.set('opensubtitlesAuthenticated', true);
                             spinner.hide();
                             $('.opensubtitles-options .valid-tick').show();
@@ -807,7 +805,7 @@
                     }).catch(function (err) {
                         win.error('OpenSubtitles.login()', err);
                         spinner.hide();
-                    cross.show();
+                        cross.show();
                     });
             } else {
                 cross.show();
