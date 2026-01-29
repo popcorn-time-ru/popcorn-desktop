@@ -111,6 +111,29 @@ vjs.TextTrack.prototype.load = function () {
             vjsTextTrack.css('z-index', 'auto').css('position', 'relative').css('top', AdvSettings.get('playerSubPosition'));
         };
 
+        // Resolve oscom:// URLs to actual download URLs
+        var resolveOscomUrl = function (url) {
+            return new Promise(function (resolve, reject) {
+                if (!url.startsWith('oscom://')) {
+                    return resolve(url);
+                }
+
+                var fileId = url.replace('oscom://', '');
+                var subtitleProvider = App.Config.getProviderForType('subtitle');
+
+                if (subtitleProvider && typeof subtitleProvider.getDownloadUrl === 'function') {
+                    subtitleProvider.getDownloadUrl(fileId)
+                        .then(resolve)
+                        .catch(function (err) {
+                            win.error('Failed to resolve OpenSubtitles download URL:', err);
+                            reject(err);
+                        });
+                } else {
+                    reject(new Error('Subtitle provider does not support getDownloadUrl'));
+                }
+            });
+        };
+
         // Fetches a raw subtitle, locally or remotely
         var get_subtitle = function (subtitle_url, callback) {
 
@@ -122,6 +145,22 @@ vjs.TextTrack.prototype.load = function () {
                     } else {
                         win.error('Failed to read subtitle!', error);
                     }
+                });
+            // Handle oscom:// URLs (OpenSubtitles.com)
+            } else if (subtitle_url.startsWith('oscom://')) {
+                resolveOscomUrl(subtitle_url).then(function (resolvedUrl) {
+                    request({
+                        url: resolvedUrl,
+                        encoding: null
+                    }, function (error, response, data) {
+                        if (!error && response.statusCode === 200) {
+                            callback(data);
+                        } else {
+                            win.error('Failed to download subtitle from OpenSubtitles!', error, response);
+                        }
+                    });
+                }).catch(function (err) {
+                    win.error('Failed to resolve subtitle URL!', err);
                 });
                 // Fetches Remotely
             } else {
