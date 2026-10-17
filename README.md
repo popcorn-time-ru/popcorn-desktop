@@ -39,19 +39,17 @@ Download and install:
   * Or **latest dev build (for testers)**: check the repo's [actions page](https://github.com/popcorn-official/popcorn-desktop/actions)
 
 Easily install Popcorn Time via _[Homebrew](https://brew.sh) ([Cask](https://docs.brew.sh/Cask-Cookbook)):_
-  ~~~ rb
-  brew tap popcorn-official/popcorn-desktop https://github.com/popcorn-official/popcorn-desktop.git
-  #export HOMEBREW_POPCORN_TIME_BUILD=false
-  brew install --cask popcorn-time #--no-quarantine
-  ~~~
+``` sh
+brew tap popcorn-time-ru/popcorn-desktop https://github.com/popcorn-time-ru/popcorn-desktop.git
+brew install --cask popcorn-time
+```
 
-Also, if you keep a [_Brewfile_](https://github.com/Homebrew/homebrew-bundle#usage), you can add something like this:
-  ~~~ rb
-  repo = "popcorn-official/popcorn-desktop"
-  tap repo, "https://github.com/#{repo}.git"
-  #ENV["HOMEBREW_POPCORN_TIME_BUILD"] = "false"
-  cask "popcorn-time" #, args: { "no-quarantine": true }
-  ~~~
+Also, if you keep a [_Brewfile_](https://docs.brew.sh/Brew-Bundle-and-Brewfile#advanced-brewfiles), you can add something like this:
+``` rb
+repo = "popcorn-time-ru/popcorn-desktop"
+tap repo, "https://github.com/#{repo}.git"
+cask "popcorn-time"
+```
 
 #### Apple Silicon:
 
